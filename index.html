@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM 训练时间计算器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>LLM 训练时间计算器</h1>
+
+    <div id="input-section">
+        <div>
+            <label for="gpu-select">选择GPU型号：</label>
+            <select id="gpu-select">
+                <option value="312">A100 (80GB PCIe - 312 TFLOPs)</option>
+                <option value="835.5">H100 (NVL PCIe - 835.5 TFLOPs)</option>
+                <option value="835.5">H800 (PCIe - 835.5 TFLOPs)</option>
+                <option value="2250">B200 (SXM 单GPU - 2250 TFLOPs)</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="modelParams">模型参数数量（十亿）：</label>
+            <input type="number" id="modelParams" placeholder="例如: 7, 70, 671">
+        </div>
+
+        <div>
+            <label for="numTokens">训练Token数量（十亿）：</label>
+            <input type="number" id="numTokens" placeholder="例如: 300, 1000, 2000">
+        </div>
+
+        <button id="calculateBtn">计算</button>
+    </div>
+
+    <div id="results-section">
+        <p id="resultHours">预估训练时间（小时）：-</p>
+        <p id="resultDays">预估训练时间（天）：-</p>
+    </div>
+
+    <div id="disclaimer-section">
+        <p>请注意：这些计算基于理论峰值FLOPs（BF16/FP16密集精度，非稀疏），并假设模型FLOPs利用率（MFU）为100%。由于软件开销、互连瓶颈、特定模型架构和批量大小等因素，实际训练时间可能会延长1.5到3倍（即MFU为33-66%）。</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
